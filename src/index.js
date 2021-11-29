@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import App from "./shared/App";
+import reportWebVitals from "./shared/reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 // import { Provider } from "firebase/firestore";
 
