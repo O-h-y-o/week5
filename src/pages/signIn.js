@@ -1,16 +1,55 @@
+import React from "react";
 import styled from "styled-components";
 import Btn from "../elements/btn";
 
-export default function signIn() {
+import { actionCreators as userActions } from "../redux/modules/user";
+import { useDispatch } from "react-redux";
+import { emailCheck } from "../shared/common";
+
+export default function SignIn() {
+  const dispatch = useDispatch();
+  const [space, setSpace] = React.useState("");
+  const [id, setId] = React.useState("");
+  const [pw, setPw] = React.useState("");
+
+  const changeSpace = (e) => {
+    setSpace(e.target.value);
+  };
+
+  const changeId = (e) => {
+    setId(e.target.value);
+  };
+
+  const changePw = (e) => {
+    setPw(e.target.value);
+  };
+
+  const login = () => {
+    console.log(space, id, pw);
+
+    if (id === "" || pw === "") {
+      window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
+      return;
+    }
+
+    if (!emailCheck(id)) {
+      window.alert("이메일 형식이 맞지 않습니다!");
+      return;
+    }
+
+    dispatch(userActions.loginFB(id, pw));
+  };
+
   return (
     <Wrap>
       <Btn />
       <InputWrap>
         <InputText>환영합니다.</InputText>
-        <Input placeholder="아이디" />
-        <Input placeholder="비밀번호" />
+        <Input placeholder="공란" onChange={changeSpace} />
+        <Input placeholder="아이디" onChange={changeId} />
+        <Input placeholder="비밀번호" onChange={changePw} />
 
-        <BtnLogin>로그인</BtnLogin>
+        <BtnLogin onClick={login}>로그인</BtnLogin>
       </InputWrap>
     </Wrap>
   );

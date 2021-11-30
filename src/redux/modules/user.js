@@ -23,11 +23,11 @@ const initialState = {
 };
 
 // middleware actions
-const loginFB = (id, pwd) => {
+const loginFB = (id, pw) => {
   return function (dispatch, getState, { history }) {
     auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
       auth
-        .signInWithEmailAndPassword(id, pwd)
+        .signInWithEmailAndPassword(id, pw)
         .then((user) => {
           console.log(user);
 

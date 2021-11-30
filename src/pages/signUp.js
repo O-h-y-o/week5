@@ -14,6 +14,7 @@ export default function SignUp() {
   const [pw_chk, setPw_chk] = useState("");
 
   const signUp = () => {
+    console.log(name, id, pw, pw_chk);
     if (id === "" || pw === "" || name === "") {
       return;
     }

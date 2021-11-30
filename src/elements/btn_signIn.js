@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 export default function Btn() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Wrap>
@@ -16,13 +20,17 @@ export default function Btn() {
             <Link to="../pages/alram">알림</Link>
           </SignBtn>
           <SignBtn>
-            <Link to="/">로그아웃</Link>
+            <Link
+              to="/"
+              _onClick={() => {
+                dispatch(userActions.logOut({}));
+              }}
+            >
+              로그아웃
+            </Link>
           </SignBtn>
         </SignWrap>
       </Wrap>
-      <SignBtn>내정보</SignBtn>
-      <SignBtn>알림</SignBtn>
-      <SignBtn>로그아웃</SignBtn>
     </>
   );
 }
