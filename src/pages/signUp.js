@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 import Btn from "../elements/btn";
 
 export default function SignUp() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pw_chk, setPw_chk] = useState("");
 
+  const signUp = () => {
+    if (id === "" || pw === "" || name === "") {
+      return;
+    }
+
+    if (pw !== pw_chk) {
+      return;
+    }
+
+    dispatch(userActions.signupFB(id, pw, name));
+  };
   return (
     <Wrap>
       <Btn />
@@ -42,7 +54,7 @@ export default function SignUp() {
           }}
         />
 
-        <BtnLogin>회원가입</BtnLogin>
+        <BtnLogin onClick={signUp}>회원가입</BtnLogin>
       </InputWrap>
     </Wrap>
   );

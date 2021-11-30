@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./shared/App";
 import reportWebVitals from "./shared/reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-// import { Provider } from "firebase/firestore";
+import { Provider } from "react-redux";
+import store from "./redux/configStore";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
