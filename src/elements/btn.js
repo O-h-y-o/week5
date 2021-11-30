@@ -24,6 +24,7 @@ const Wrap = styled.div`
   width: 30%;
   height: 70px;
   border-bottom: 1px solid #999;
+  z-index: 10;
 `;
 
 const Logo = styled.div`

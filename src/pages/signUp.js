@@ -1,15 +1,46 @@
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
 import Btn from "../elements/btn";
 
-export default function signUp() {
+export default function SignUp() {
+  // const dispatch = useDispatch();
+
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const [pw_chk, setPw_chk] = useState("");
+
   return (
     <Wrap>
       <Btn />
       <InputWrap>
         <InputText>회원가입 페이지 입니다~</InputText>
-        <Input placeholder="아이디" />
-        <Input placeholder="비밀번호" />
-        <Input placeholder="비밀번호 확인" />
+        <Input
+          placeholder="이름"
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="아이디"
+          onChange={(e) => {
+            setId(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="비밀번호"
+          onChange={(e) => {
+            setPw(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="비밀번호 확인"
+          onChange={(e) => {
+            setPw_chk(e.target.value);
+          }}
+        />
 
         <BtnLogin>회원가입</BtnLogin>
       </InputWrap>
@@ -24,7 +55,7 @@ const Wrap = styled.div`
 const InputWrap = styled.div`
   position: absolute;
   width: 80%;
-  margin: 100px auto;
+  margin: 200px auto;
   left: 0;
   right: 0;
   text-align: center;
@@ -35,7 +66,7 @@ const InputText = styled.div`
   font-size: 30px;
   font-weight: 900;
   margin: 30px auto 10px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   border-bottom: 1px solid #eee;
 `;
 

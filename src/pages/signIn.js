@@ -23,14 +23,20 @@ const Wrap = styled.div`
 const InputWrap = styled.div`
   position: absolute;
   width: 80%;
-  margin: 100px auto;
+  margin: 200px auto;
   left: 0;
   right: 0;
   text-align: center;
   background-color: #999;
 `;
 
-const InputText = styled.div``;
+const InputText = styled.div`
+  font-size: 30px;
+  font-weight: 900;
+  margin: 30px auto 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+`;
 
 const Input = styled.input`
   margin: 15px auto;
