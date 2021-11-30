@@ -25,6 +25,8 @@ const Wrap = styled.div`
   min-width: 400px;
   height: 70px;
   border-bottom: 1px solid #999;
+  background-color: #888;
+  opacity: 0.85;
   z-index: 10;
 `;
 
@@ -63,9 +65,15 @@ const SignBtn = styled.div`
   text-align: center;
   line-height: 2.5;
   margin-right: 10px;
+  transition: 0.5s;
 
   & a {
     text-decoration: none;
     color: #000;
+  }
+
+  &:hover {
+    background-color: #777;
+    transform: scale(1.1);
   }
 `;

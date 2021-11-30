@@ -111,10 +111,12 @@ const loginCheckFB = () => {
 };
 
 const logoutFB = () => {
+  console.log("로그아웃");
   return function (dispatch, getState, { history }) {
+    console.log("로그아웃");
     auth.signOut().then(() => {
       dispatch(logOut());
-      history.replace("/sign");
+      history.replace("/");
     });
   };
 };

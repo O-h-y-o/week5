@@ -8,13 +8,8 @@ import { emailCheck } from "../shared/common";
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const [space, setSpace] = React.useState("");
   const [id, setId] = React.useState("");
   const [pw, setPw] = React.useState("");
-
-  const changeSpace = (e) => {
-    setSpace(e.target.value);
-  };
 
   const changeId = (e) => {
     setId(e.target.value);
@@ -25,7 +20,7 @@ export default function SignIn() {
   };
 
   const login = () => {
-    console.log(space, id, pw);
+    console.log(id, pw);
 
     if (id === "" || pw === "") {
       window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
@@ -45,7 +40,6 @@ export default function SignIn() {
       <Btn />
       <InputWrap>
         <InputText>환영합니다.</InputText>
-        <Input placeholder="공란" onChange={changeSpace} />
         <Input placeholder="아이디" onChange={changeId} />
         <Input placeholder="비밀번호" onChange={changePw} />
 
@@ -67,6 +61,7 @@ const InputWrap = styled.div`
   right: 0;
   text-align: center;
   background-color: #999;
+  border-radius: 10%;
 `;
 
 const InputText = styled.div`

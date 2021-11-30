@@ -22,7 +22,7 @@ export default function Btn() {
           <SignBtn>
             <Link
               to="/"
-              _onClick={() => {
+              onClick={() => {
                 dispatch(userActions.logoutFB({}));
               }}
             >
@@ -40,7 +40,9 @@ const Wrap = styled.div`
   width: 50%;
   min-width: 400px;
   height: 70px;
+  background-color: #888;
   border-bottom: 1px solid #999;
+  opacity: 0.85;
 `;
 
 const Logo = styled.div`
@@ -78,9 +80,15 @@ const SignBtn = styled.div`
   text-align: center;
   line-height: 2.5;
   margin-right: 10px;
+  transition: 0.5s;
 
   & a {
     text-decoration: none;
     color: #000;
+  }
+
+  &:hover {
+    background-color: #777;
+    transform: scale(1.1);
   }
 `;
