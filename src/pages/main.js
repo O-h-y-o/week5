@@ -1,7 +1,9 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import styled from "styled-components";
+import { Route, Switch, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import PostBtn from "../elements/postBtn";
 import Btn from "../elements/btn";
 import { getCookie } from "../shared/cookies";
 import BtnLogin from "../elements/btn_signIn";
@@ -27,16 +29,29 @@ export default function Main() {
     }
   }, []);
 
+  const notLogin = () => {
+    alert("로그인을 해");
+  };
+
   if (is_login && is_session) {
     return (
       <>
         <BtnLogin />
+        <Link to="./pages/post">
+          <PostBtn />
+        </Link>
       </>
     );
   }
+
   return (
     <>
       <Btn />
+      <NotLogin onClick={notLogin}>
+        <PostBtn />
+      </NotLogin>
     </>
   );
 }
+
+const NotLogin = styled.div``;

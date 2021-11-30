@@ -8,12 +8,14 @@ import { history } from "../redux/configStore";
 import Main from "../pages/main";
 import signIn from "../pages/signIn";
 import signUp from "../pages/signUp";
+import Post from "../pages/post";
 
 function App() {
   return (
     <>
       <Wrap>
         <ConnectedRouter history={history}>
+          <Route exact path="/pages/post" component={Post} />
           <Route exact path="/pages/signUp" component={signUp} />
           <Route exact path="/pages/signIn" component={signIn} />
           <Route exact path="/" component={Main} />
