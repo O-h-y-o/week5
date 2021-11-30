@@ -23,7 +23,7 @@ export default function Btn() {
             <Link
               to="/"
               _onClick={() => {
-                dispatch(userActions.logOut({}));
+                dispatch(userActions.logoutFB({}));
               }}
             >
               로그아웃
@@ -37,7 +37,8 @@ export default function Btn() {
 
 const Wrap = styled.div`
   position: fixed;
-  width: 30%;
+  width: 50%;
+  min-width: 400px;
   height: 70px;
   border-bottom: 1px solid #999;
 `;

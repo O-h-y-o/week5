@@ -21,7 +21,8 @@ export default function Btn() {
 
 const Wrap = styled.div`
   position: fixed;
-  width: 30%;
+  width: 50%;
+  min-width: 400px;
   height: 70px;
   border-bottom: 1px solid #999;
   z-index: 10;
