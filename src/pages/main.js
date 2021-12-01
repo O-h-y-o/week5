@@ -9,6 +9,7 @@ import { getCookie } from "../shared/cookies";
 import BtnLogin from "../elements/btn_signIn";
 import { apiKey } from "../shared/firebase";
 import { actionCreators as userActions } from "../redux/modules/user";
+import PostList from "../components/PostList";
 
 export default function Main() {
   // const [is_login, setIsLogin] = React.useState(false);
@@ -50,6 +51,7 @@ export default function Main() {
       <NotLogin onClick={notLogin}>
         <PostBtn />
       </NotLogin>
+      <PostList />
     </>
   );
 }

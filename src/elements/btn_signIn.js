@@ -43,6 +43,7 @@ const Wrap = styled.div`
   background-color: #888;
   border-bottom: 1px solid #999;
   opacity: 0.85;
+  z-index: 10;
 `;
 
 const Logo = styled.div`
