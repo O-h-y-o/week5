@@ -1,7 +1,7 @@
 import React from "react";
-import { actionCreates as Actions } from "../redux/modules/post";
+import post, { actionCreates as Actions } from "../redux/modules/post";
 // import {} from "";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PostList() {
   const dispatch = useDispatch();
@@ -9,9 +9,10 @@ export default function PostList() {
   React.useEffect(() => {
     dispatch(Actions.getPostFB());
   });
-  return (
-    <>
-      <div>123</div>
-    </>
-  );
+
+  const post_list = useSelector((state) => state.post.list);
+
+  console.log(post_list);
+
+  return <></>;
 }
