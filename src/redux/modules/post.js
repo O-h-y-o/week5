@@ -27,10 +27,10 @@ export const getPostFB = () => {
     // console.log(postDB);
     // console.log(postDB.get());
     postDB.get().then((doc) => {
-      console.log(doc);
+      // console.log(doc);
       let post_list = [];
       doc.forEach((doc) => {
-        console.log(doc.id, doc.data());
+        // console.log(doc.id, doc.data());
         let _post = doc.data();
         let post = {
           id: doc.id,

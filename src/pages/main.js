@@ -21,11 +21,11 @@ export default function Main() {
 
   const is_session = sessionStorage.getItem(_session_key) ? true : false;
 
-  console.log(is_session);
+  // console.log(is_session);
 
   React.useEffect(() => {
     if (is_session) {
-      console.log(is_session);
+      // console.log(is_session);
       dispatch(userActions.loginCheckFB());
     }
   }, []);
@@ -41,6 +41,7 @@ export default function Main() {
         <Link to="./pages/post">
           <PostBtn />
         </Link>
+        <PostList />
       </>
     );
   }

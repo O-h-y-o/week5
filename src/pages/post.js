@@ -1,25 +1,47 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { $CombinedState } from "redux";
 
 import styled from "styled-components";
 import BtnLogin from "../elements/btn_signIn";
+import image from "../redux/modules/image";
 import { actionCreates as Actions } from "../redux/modules/post";
+import { storage } from "../shared/firebase";
 
 export default function Post() {
   const [contents, setContents] = useState("");
+  const [file_name, setFileName] = useState("");
 
   const changeContents = (e) => {
     setContents(e.target.value);
   };
 
-  console.log(contents);
-
   const dispatch = useDispatch();
+  const uploading = useSelector((state) => state.image.uploading);
 
   const addPost = () => {
     dispatch(Actions.addPostFB(contents));
   };
 
+  const fileinput = React.useRef();
+
+  const uploadFB = () => {
+    let image = fileinput.current?.files[0];
+    const _upload = storage.ref(`images/${image.name}`).put(image);
+
+    setFileName(image.name);
+
+    // const file_name = document.querySelector(".upload_name");
+
+    // file_name
+    _upload.then((snapshot) => {
+      console.log(snapshot);
+
+      snapshot.ref.getDownloadURL().then((url) => {
+        console.log(url);
+      });
+    });
+  };
   return (
     <>
       <BtnLogin />
@@ -27,12 +49,24 @@ export default function Post() {
         <Posting>
           <WriteWrap>
             <Input placeholder="제목을 입력해주세요" />
+            <FileInputArea>
+              <FileLabel for="file">이미지 업로드</FileLabel>
+              <FileInput
+                type="file"
+                id="file"
+                onChange={uploadFB}
+                ref={fileinput}
+              />
+              <input className="upload_name" value={file_name} />
+            </FileInputArea>
             <Textarea
               onChange={changeContents}
               placeholder="내용을 입력해주세요"
             />
-            <InputButton style={{}} type="file" />
-            <Button onClick={addPost}>작성하기</Button>
+            {/* <InputButton onChange={uploadFB} ref={fileinput} type="file" /> */}
+            <ButtonArea>
+              <Button onClick={addPost}>작성하기</Button>
+            </ButtonArea>
           </WriteWrap>
         </Posting>
       </PostingWrap>
@@ -70,7 +104,6 @@ const Input = styled.input`
   border-radius: 5px;
   outline: none;
   box-sizing: border-box;
-  margin-bottom: 20px;
 
   &::placeholder {
     text-align: center;
@@ -119,4 +152,39 @@ const InputButton = styled.input`
   }
 `;
 
-const Button = styled.button``;
+const FileInputArea = styled.div`
+  margin: auto auto auto;
+  padding: 30px 0;
+`;
+const FileInput = styled.input`
+  display: none;
+`;
+
+const FileLabel = styled.label`
+  border: 1px solid #999;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  margin: auto;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const ButtonArea = styled.div`
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  margin: 60px auto;
+  border-radius: 5px;
+  border: 1px solid #999;
+  outline: none;
+  cursor: pointer;
+`;
