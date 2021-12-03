@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -9,13 +10,13 @@ import "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCsmrG3lNuOsGnqPA4tzHAlHyFki9DAdqM",
-  authDomain: "week5-10bc2.firebaseapp.com",
-  projectId: "week5-10bc2",
-  storageBucket: "week5-10bc2.appspot.com",
-  messagingSenderId: "59131054912",
-  appId: "1:59131054912:web:21ab901b81d54bf3d608a5",
-  measurementId: "G-J6GQB0PD06",
+  apiKey: "AIzaSyB4G42zB9sonaL6H_9fOEtbxcu-h62c9dk",
+  authDomain: "reweek5.firebaseapp.com",
+  projectId: "reweek5",
+  storageBucket: "reweek5.appspot.com",
+  messagingSenderId: "451605727247",
+  appId: "1:451605727247:web:bba2d7e690e672fddb7b7a",
+  measurementId: "G-45JQ228F74",
 };
 
 // Initialize Firebase

@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { firestore } from "../../shared/firebase";
+// import { collection, getDocs, addDoc } from "firebase/firestore";
 import { storage } from "../../shared/firebase";
 import { actionCreators as imgActions } from "./image";
 import moment from "moment";
@@ -24,13 +25,14 @@ const initialPost = {
 
 export const getPostFB = () => {
   return function (dispatch, getState, { history }) {
-    const postDB = firestore.collection("post");
+    const postDB = firestore.collection("Post");
 
     postDB.get().then((docs) => {
+      console.log(docs);
       let post_list = [];
       docs.forEach((doc) => {
+        // console.log(docs);
         let _post = doc.data();
-
         // ['commenct_cnt', 'contents', ..]
         let post = Object.keys(_post).reduce(
           (acc, cur) => {
@@ -55,7 +57,7 @@ export const getPostFB = () => {
   };
 };
 
-export const addPostFB = (title, contents, tags) => {
+const addPostFB = (title, contents, tags) => {
   return function (dispatch, getState, { history }) {
     const postDB = firestore.collection("Post");
     const _user = getState().user.user;
@@ -120,6 +122,6 @@ export default handleActions(
 export const actionCreates = {
   setPost,
   addPost,
-  getPostFB,
+  // getPostFB,
   addPostFB,
 };
