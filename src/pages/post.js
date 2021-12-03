@@ -9,21 +9,28 @@ import { actionCreates as Actions } from "../redux/modules/post";
 import { storage } from "../shared/firebase";
 
 export default function Post() {
+  const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [tags, setTags] = useState("");
   const [file_name, setFileName] = useState("");
+
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
+  };
 
   const changeContents = (e) => {
     setContents(e.target.value);
   };
 
-  const selectFile = (e) => {};
+  const changeTags = (e) => {
+    setTags(e.target.value);
+  };
 
   const dispatch = useDispatch();
-  const uploading = useSelector((state) => state.image.uploading);
   const preview = useSelector((state) => state.image.preview);
 
   const addPost = () => {
-    dispatch(Actions.addPostFB(contents));
+    dispatch(Actions.addPostFB(title, contents, tags));
   };
 
   const fileinput = React.useRef();
@@ -53,11 +60,14 @@ export default function Post() {
               src={preview ? preview : "http://via.placeholder.com/400x300"}
               alt="이미지"
             />
+            <Title>{title}</Title>
+            <Contents>{contents}</Contents>
+            <Tags>{tags}</Tags>
           </Preview>
         </PreviewWrap>
         <Posting>
           <WriteWrap>
-            <Input placeholder="제목을 입력해주세요" />
+            <Input placeholder="제목을 입력해주세요" onChange={changeTitle} />
             <FileInputArea>
               <FileLabel for="file">이미지 업로드</FileLabel>
               <FileInput
@@ -71,6 +81,11 @@ export default function Post() {
             <Textarea
               onChange={changeContents}
               placeholder="내용을 입력해주세요"
+            />
+            <Input
+              placeholder="태그를 입력해주세요 ex) #리액트 #너무 #쉽다"
+              onChange={changeTags}
+              style={{ marginTop: "30px" }}
             />
             {/* <InputButton onChange={uploadFB} ref={fileinput} type="file" /> */}
             <ButtonArea>
@@ -90,9 +105,6 @@ const PostingWrap = styled.div`
 
 const Posting = styled.div`
   position: relative;
-  /* top: 200px; */
-  /* left: 0;
-  right: 0; */
   margin: 0 auto 50px;
   border: 10px dotted #ddd;
   border-radius: 5px;
@@ -108,11 +120,27 @@ const PreviewWrap = styled.div`
 const Preview = styled.div`
   border: 1px solid #000;
   padding: 10px;
+  border-radius: 5px;
+  pointer-events: none;
 `;
 
 const Img = styled.img`
   max-width: 100%;
   max-height: 100%;
+  display: block;
+  margin: auto;
+`;
+
+const Title = styled.div`
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 20px;
+`;
+
+const Contents = styled.div``;
+
+const Tags = styled.div`
+  margin: 15px;
 `;
 
 const WriteWrap = styled.div`

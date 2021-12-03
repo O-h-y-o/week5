@@ -24,29 +24,26 @@ const initialPost = {
 
 export const getPostFB = () => {
   return function (dispatch, getState, { history }) {
-    const postDB = firestore.collection("Post");
-    // window.alert("테스트");
-    // console.log(postDB);
-    // console.log(postDB.get());
-    postDB.get().then((doc) => {
-      // console.log(doc);
+    const postDB = firestore.collection("post");
+
+    postDB.get().then((docs) => {
       let post_list = [];
-      doc.forEach((doc) => {
-        // console.log(doc.id, doc.data());
+      docs.forEach((doc) => {
         let _post = doc.data();
-        let post = {
-          id: doc.id,
-          user_info: {
-            user_name: _post.user_name,
-            user_profile: _post.user_profile,
-            user_id: _post.user_id,
+
+        // ['commenct_cnt', 'contents', ..]
+        let post = Object.keys(_post).reduce(
+          (acc, cur) => {
+            if (cur.indexOf("user_") !== -1) {
+              return {
+                ...acc,
+                user_info: { ...acc.user_info, [cur]: _post[cur] },
+              };
+            }
+            return { ...acc, [cur]: _post[cur] };
           },
-          contents: _post.contents,
-          image_url: _post.image_url,
-          comment_url: _post.comment_url,
-          comment_cnt: _post.comment_cnt,
-          insert_dt: _post.insert_dt,
-        };
+          { id: doc.id, user_info: {} }
+        );
 
         post_list.push(post);
       });
@@ -58,7 +55,7 @@ export const getPostFB = () => {
   };
 };
 
-export const addPostFB = (contents = "") => {
+export const addPostFB = (title, contents, tags) => {
   return function (dispatch, getState, { history }) {
     const postDB = firestore.collection("Post");
     const _user = getState().user.user;
@@ -72,7 +69,9 @@ export const addPostFB = (contents = "") => {
 
     const _post = {
       ...initialPost,
+      title: title,
       contents: contents,
+      tags: tags,
       insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
     };
 
@@ -106,7 +105,10 @@ export const addPostFB = (contents = "") => {
 
 export default handleActions(
   {
-    [SET_POST]: (state, action) => produce(state, (draft) => {}),
+    [SET_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list = action.payload.post_list;
+      }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list.unshift(action.payload.post);
