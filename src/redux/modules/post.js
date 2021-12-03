@@ -1,6 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { firestore } from "../../shared/firebase";
+import { storage } from "../../shared/firebase";
+import { actionCreators as imgActions } from "./image";
 import moment from "moment";
 
 const SET_POST = "SET_POST";
@@ -60,7 +62,7 @@ export const addPostFB = (contents = "") => {
   return function (dispatch, getState, { history }) {
     const postDB = firestore.collection("Post");
     const _user = getState().user.user;
-    console.log(_user);
+    const _image = getState().image.preview;
 
     const user_info = {
       user_name: _user.user_name,
@@ -74,19 +76,31 @@ export const addPostFB = (contents = "") => {
       insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
     };
 
-    console.log(_post);
+    const _upload = storage
+      .ref(`images/$user_info.user_id}_${new Date().getTime()}`)
+      .putString(_image, "data_url");
 
-    postDB
-      .add({ ...user_info, ..._post })
-      .then((doc) => {
-        let post = { user_info, ..._post, id: doc.id };
-        dispatch(addPost(post));
-        window.alert("작성 성공!");
-        history.replace("/");
-      })
-      .catch((err) => {
-        console.log("post 작성 실패!", err);
-      });
+    _upload.then((snapshot) => {
+      snapshot.ref
+        .getDownloadURL()
+        .then((url) => {
+          dispatch(imgActions.uploadImage(url));
+          return url;
+        })
+        .then((url) => {
+          postDB
+            .add({ ...user_info, ..._post, image_url: url })
+            .then((doc) => {
+              let post = { user_info, ..._post, id: doc.id, image_url: url };
+              dispatch(addPost(post));
+              window.alert("작성 성공!");
+              history.replace("/");
+            })
+            .catch((err) => {
+              console.log("post 작성 실패!", err);
+            });
+        });
+    });
   };
 };
 

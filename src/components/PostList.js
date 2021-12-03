@@ -10,7 +10,7 @@ export default function PostList() {
     dispatch(Actions.getPostFB());
   });
 
-  const post_list = useSelector((state) => state.post.list);
+  const post_list = useSelector((state) => state);
 
   console.log(post_list);
 

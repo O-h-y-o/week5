@@ -28,7 +28,7 @@ function App() {
 const Wrap = styled.div`
   width: 50%;
   min-width: 400px;
-  height: 1500px;
+  /* height: 2000px; */
   background-color: #eee;
   margin: auto;
 `;
