@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
+import { Link } from "react-router-dom";
 import { getPostFB } from "../redux/modules/post";
 // import {} from "";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +30,6 @@ export default function PostList() {
 
   let user_info = useSelector((state) => state.user.user.uid);
   console.log(user_info);
-  const edit = () => {};
 
   return (
     <>
@@ -40,18 +40,17 @@ export default function PostList() {
             <Title>{post.title}</Title>
             <Contents>{post.contents}</Contents>
             <Tags>{post.tags}</Tags>
-            <div>댓글 {post.comment_cnt}개</div>
             <div>작성자 {post.user_info.user_name}</div>
             <div>작성일 {post.insert_dt}</div>
             {console.log(post.user_info.user_id)}
             {post.user_info.user_id === user_info ? (
               <PostRight>
-                <Edit onClick={edit}>수정</Edit>
+                {/* <Link to="../pages/edit" style={{ textDecoration: "none" }}> */}
+                <Edit>수정</Edit>
+                {/* </Link> */}
                 <Delete>삭제</Delete>
               </PostRight>
-            ) : (
-              console.log("not login")
-            )}
+            ) : null}
           </View>
         );
       })}
@@ -101,6 +100,7 @@ const Edit = styled.div`
   cursor: pointer;
   border-left: 0;
   transition: 0.5s;
+  color: #000;
 
   &:hover {
     background-color: #111;

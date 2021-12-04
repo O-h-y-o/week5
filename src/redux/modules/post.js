@@ -8,6 +8,8 @@ import moment from "moment";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
+const EDIT_POST = "EDIT_POST";
+const DELETE_POST = "DELETE_POST";
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -17,10 +19,10 @@ const initialState = {
 };
 
 const initialPost = {
-  image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  contents: "고양이네요!",
-  comment_cnt: 10,
-  insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
+  image_url: "",
+  contents: "",
+  comment_cnt: 5,
+  insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm"),
 };
 
 export const getPostFB = () => {
@@ -74,7 +76,7 @@ const addPostFB = (title, contents, tags) => {
       title: title,
       contents: contents,
       tags: tags,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
+      insert_dt: moment().format("YYYY년 MM월 DD일 hh:mm"),
     };
 
     const _upload = storage
@@ -115,6 +117,8 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list.unshift(action.payload.post);
       }),
+    [EDIT_POST]: (state, action) => produce(state, (draft) => {}),
+    [DELETE_POST]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
@@ -122,6 +126,5 @@ export default handleActions(
 export const actionCreates = {
   setPost,
   addPost,
-  // getPostFB,
   addPostFB,
 };

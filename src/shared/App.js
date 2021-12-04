@@ -9,12 +9,14 @@ import Main from "../pages/main";
 import signIn from "../pages/signIn";
 import signUp from "../pages/signUp";
 import Post from "../pages/post";
+import Edit from "../pages/edit";
 
 function App() {
   return (
     <>
       <Wrap>
         <ConnectedRouter history={history}>
+          <Route exact path="/pages/edit" component={Edit} />
           <Route exact path="/pages/post" component={Post} />
           <Route exact path="/pages/signUp" component={signUp} />
           <Route exact path="/pages/signIn" component={signIn} />
