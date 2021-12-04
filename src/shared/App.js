@@ -28,9 +28,9 @@ function App() {
 const Wrap = styled.div`
   width: 50%;
   min-width: 400px;
-  /* height: 2000px; */
   background-color: #eee;
-  margin: auto;
+  margin: 70px auto;
+  /* padding: 100px 0; */
 `;
 
 export default App;

@@ -28,7 +28,7 @@ const PostBt = styled.button`
   line-height: 3.2;
   text-align: center;
   transition: 0.5s;
-
+  z-index: 55;
   &:hover {
     background-color: #999;
     transform: scale(1.1);

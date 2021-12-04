@@ -30,6 +30,7 @@ export default function Post() {
   const preview = useSelector((state) => state.image.preview);
 
   const addPost = () => {
+    window.alert("등록중입니다. 잠시만 기다려주세요^_^");
     dispatch(Actions.addPostFB(title, contents, tags));
   };
 

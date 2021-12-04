@@ -45,7 +45,7 @@ const loginFB = (id, pw) => {
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-
+          window.alert("이메일이나 비밀번호가 올바르지 않습니다.");
           console.log(errorCode, errorMessage);
         });
     });

@@ -10,25 +10,12 @@ import { actionCreators as userActions } from "../redux/modules/user";
 export default function PostList() {
   const dispatch = useDispatch();
 
-  const is_login = useSelector((state) => state.user.is_login);
-  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-
-  const is_session = sessionStorage.getItem(_session_key) ? true : false;
-
-  React.useEffect(() => {
-    if (is_session) {
-      dispatch(userActions.loginCheckFB());
-    }
-  }, []);
-
   React.useEffect(() => {
     dispatch(getPostFB());
   }, []);
 
   const post_list = useSelector((state) => state.post.list);
 
-  let user_info = useSelector((state) => state.user.user.uid);
-  console.log(user_info);
   const edit = () => {};
 
   return (
@@ -43,15 +30,6 @@ export default function PostList() {
             <div>댓글 {post.comment_cnt}개</div>
             <div>작성자 {post.user_info.user_name}</div>
             <div>작성일 {post.insert_dt}</div>
-            {console.log(post.user_info.user_id)}
-            {post.user_info.user_id === user_info ? (
-              <PostRight>
-                <Edit onClick={edit}>수정</Edit>
-                <Delete>삭제</Delete>
-              </PostRight>
-            ) : (
-              console.log("not login")
-            )}
           </View>
         );
       })}
